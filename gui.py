@@ -1,22 +1,23 @@
 import sys
-from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication
+from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication, QAbstractItemView
 from PyQt5.QtGui import QIcon
 import fitz
 
 
-class GUI(QMainWindow):
+class ReaDF(QMainWindow, Ui_MainWindow):
 
     def __init__(self):
         super().__init__()
         self.toolbar = self.addToolBar('Exit')
-
         self.init_window()
 
+    # initialize the window, tool bar
     def init_window(self):
+        # add button
         add_action = QAction(QIcon('img/iconfinder_plus.png'), '', self)
         add_action.setShortcut('Ctrl+O')
-        # add_action.triggered.connect(qApp.)
-
+                # add_action.triggered.connect(qApp.)
+        # exit button
         exit_action = QAction(QIcon('img/iconfinder_close.png'), 'Exit', self)
         exit_action.setShortcut('Ctrl+Q')
         exit_action.triggered.connect(qApp.quit)
@@ -29,6 +30,7 @@ class GUI(QMainWindow):
         self.setWindowTitle('Toolbar')
         self.show()
 
+    #
     def _setTableStyle(self):
         # 开启水平与垂直滚轴
         self.table.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)

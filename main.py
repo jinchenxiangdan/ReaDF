@@ -5,9 +5,9 @@ GUI
 import sys
 from PyQt5.QtWidgets import QApplication
 
-from gui import GUI
+from gui import ReaDF
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = GUI()
+    ex = ReaDF()
     sys.exit(app.exec_())
