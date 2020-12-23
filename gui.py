@@ -1,14 +1,22 @@
+"""
+Author: Shawn Jin
+Purpose:
+"""
+
+
 import sys
 from PyQt5.QtWidgets import QMainWindow, QAction, qApp, QApplication, QAbstractItemView
 from PyQt5.QtGui import QIcon
+from main_window import MainWindow
 import fitz
 
 
-class ReaDF(QMainWindow, Ui_MainWindow):
+class ReaDF(QMainWindow, MainWindow):
 
-    def __init__(self):
-        super().__init__()
-        self.toolbar = self.addToolBar('Exit')
+    def __init__(self, parent=None):
+        # inherit parent class MainWindow
+        super(ReaDF, self).__init__(parent)
+
         self.init_window()
 
     # initialize the window, tool bar
