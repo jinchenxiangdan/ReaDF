@@ -53,11 +53,11 @@ class MainWindow(object):
         self.action.setToolTip(_translate("MainWindow", "网格布局"))
 # import r1_rc
 
-if __name__ == '__main__':
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    qt_main_window = QtWidgets.QMainWindow()
-    ui = MainWindow()
-    ui.setup_ui(qt_main_window)
-    qt_main_window.show()
-    sys.exit(app.exec_())
+# if __name__ == '__main__':
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     qt_main_window = QtWidgets.QMainWindow()
+#     ui = MainWindow()
+#     ui.setup_ui(qt_main_window)
+#     qt_main_window.show()
+#     sys.exit(app.exec_())
