@@ -1,3 +1,2 @@
 PyQt5~=5.15.0
 PyMuPDF
-fitz~=0.0.1.dev2

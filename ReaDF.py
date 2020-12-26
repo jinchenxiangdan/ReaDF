@@ -9,7 +9,7 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import QMainWindow, QDesktopWidget, \
         QApplication, QPushButton, QFrame, QAction, QFileDialog, QHBoxLayout, QTableWidget, QTableWidgetItem, \
         QLabel, QMenu, QAbstractItemView
-from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtGui import QIcon, QPixmap, QImage
 from PyQt5.QtCore import QSize, Qt
 from main_window import MainWindow
 
@@ -19,21 +19,24 @@ import fitz
 class ReaDF(QMainWindow, MainWindow):
 
     def __init__(self, parent=None):
-        # inherit parent class MainWindow
+        pass
+        # # inherit parent class MainWindow
         super(ReaDF, self).__init__(parent)
-        # self.init_window()
-        self.y = 0
-        self.x = 0
-        self.setWindowIcon(QIcon('img/book.png'))
-        self.screen = QDesktopWidget().screenGeometry()
-        self.setup_ui(self)
-        self.setWindowFlags(Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint)
-        self.setContextMenuPolicy(Qt.NoContextMenu)
-        # self.setFixedSize(self.screen.width(), self.screen.height())
-        self.table = QTableWidget()
-        self.setCentralWidget(self.table)
-        self.init_ui()
-        self.book_list = []
+        # # print model version
+        # print(fitz.__doc__)
+        # # self.init_window()
+        # self.y = 0
+        # self.x = 0
+        # self.setWindowIcon(QIcon('img/book.png'))
+        # self.screen = QDesktopWidget().screenGeometry()
+        # self.setup_ui(self)
+        # self.setWindowFlags(Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint)
+        # self.setContextMenuPolicy(Qt.NoContextMenu)
+        # # self.setFixedSize(self.screen.width(), self.screen.height())
+        # self.table = QTableWidget()
+        # self.setCentralWidget(self.table)
+        # self.init_ui()
+        # self.book_list = []
 
     def init_ui(self):
         self.set_table_style()
@@ -86,6 +89,9 @@ class ReaDF(QMainWindow, MainWindow):
 
     def read_pdf(self, file_path):
         pdf_file = fitz.open(file_path)
+        # TODO: add custom setting on naming files
+        title = file_path.split('/' or '\\')[-1].replace('.pdf', '')
+
 
     def setIcon(self, file_name):
         pdf_file = fitz.open(file_name)
