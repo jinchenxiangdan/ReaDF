@@ -5,7 +5,9 @@ Purpose:
 
 
 import sys
+from PyQt5 import QtCore
 from PyQt5 import QtGui
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QDesktopWidget, \
         QApplication, QPushButton, QFrame, QAction, QFileDialog, QHBoxLayout, QTableWidget, QTableWidgetItem, \
         QLabel, QMenu, QAbstractItemView
@@ -16,18 +18,72 @@ from main_window import MainWindow
 import fitz
 
 
+def init_tool_bar(main_window):
+    """
+
+    Initial tool bar of a main window. Add {} into the tool bar.
+
+    :param main_window: a QMainWindow object
+    :return:
+    """
+    # set up a empty tool bar
+    tool_bar = QtWidgets.QToolBar(main_window)
+    tool_bar.setMovable(True)
+    tool_bar.setObjectName("ToolBar")
+    main_window.addToolBar(QtCore.Qt.TopToolBarArea, tool_bar)
+    open_file_button = QtWidgets.QAction(main_window)
+    icon = QtGui.QIcon()
+    icon.addPixmap(QtGui.QPixmap("img/iconfinder_plus.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+    open_file_button.setIcon(icon)
+    open_file_button.setObjectName("OpenFile")
+    set_bar = QtWidgets.QAction(main_window)
+    icon1 = QtGui.QIcon()
+    icon1.addPixmap(QtGui.QPixmap("img/iconfinder_Tile.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    set_bar.setIcon(icon1)
+    set_bar.setObjectName("setbar")
+    action = QtWidgets.QAction(main_window)
+    action.setCheckable(True)
+    icon2 = QtGui.QIcon()
+    icon2.addPixmap(QtGui.QPixmap("img/iconfinder_close.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+    action.setIcon(icon2)
+    action.setObjectName("action")
+    tool_bar.addAction(open_file_button)
+    tool_bar.addAction(action)
+    tool_bar.addAction(set_bar)
+
+
 class ReaDF(QMainWindow, MainWindow):
 
+    _TITLE = "ReaDF"
+    _FILE_PATH = "pdf_examples/"
+
     def __init__(self, parent=None):
-        pass
-        # # inherit parent class MainWindow
+        """
+
+        Initial ReaDF window, icon,
+
+        :param parent:
+        """
         super(ReaDF, self).__init__(parent)
-        # # print model version
-        # print(fitz.__doc__)
-        # # self.init_window()
+        self.setup_ui(self)
+        init_tool_bar(self)
+
+        ##################################################################
+        # test
+        ##################################################################
+        print(fitz.__doc__)
+        example_pdf_file_path = "pdf_examples/declaration_of_support.pdf"
+        example_pdf_file = fitz.open(example_pdf_file_path)
+        print(example_pdf_file.metadata)
+        print(example_pdf_file.pageCount)
+        print(example_pdf_file.getToC())
+        pix_map = example_pdf_file[0].getPixmap()
+        ##################################################################
+
         # self.y = 0
         # self.x = 0
-        # self.setWindowIcon(QIcon('img/book.png'))
+        self.setWindowIcon(QIcon('img/book.png'))
+        self.setWindowTitle(self._TITLE)
         # self.screen = QDesktopWidget().screenGeometry()
         # self.setup_ui(self)
         # self.setWindowFlags(Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint)
@@ -37,10 +93,6 @@ class ReaDF(QMainWindow, MainWindow):
         # self.setCentralWidget(self.table)
         # self.init_ui()
         # self.book_list = []
-
-    def init_ui(self):
-        self.set_table_style()
-        self.addbar.triggered.connect(self.open)
 
     def filter_book(self, fname):
         if not fname:
